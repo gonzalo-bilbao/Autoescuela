@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="autoescuela.list">
+      <field name="name">autoescuela list</field>
+      <field name="model">autoescuela.autoescuela</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="autoescuela.action_window">
+      <field name="name">autoescuela window</field>
+      <field name="res_model">autoescuela.autoescuela</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="autoescuela.action_server">
+      <field name="name">autoescuela server</field>
+      <field name="model_id" ref="model_autoescuela_autoescuela"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="autoescuela" id="autoescuela.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="autoescuela.menu_1" parent="autoescuela.menu_root"/>
+    <menuitem name="Menu 2" id="autoescuela.menu_2" parent="autoescuela.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="autoescuela.menu_1_list" parent="autoescuela.menu_1"
+              action="autoescuela.action_window"/>
+    <menuitem name="Server to list" id="autoescuela" parent="autoescuela.menu_2"
+              action="autoescuela.action_server"/>
+-->
+  </data>
+</odoo>
