@@ -1,60 +1,100 @@
 <odoo>
   <data>
-    <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="autoescuela.list">
-      <field name="name">autoescuela list</field>
-      <field name="model">autoescuela.autoescuela</field>
+
+    <!-- Vista lista (tree) de Alumnos -->
+    <record model="ir.ui.view" id="alumno_list_view">
+      <field name="name">alumno.list</field>
+      <field name="model">autoescuela.alumno</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
+          <field name="name"/>          <!-- Nombre del alumno -->
+          <field name="dni"/>           <!-- DNI -->
+          <field name="matricula"/>     <!-- Matrícula -->
+          <field name="profesor_id"/>   <!-- Profesor asignado -->
+          <field name="autoescuela_id"/><!-- Autoescuela -->
         </tree>
       </field>
     </record>
--->
 
-    <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="autoescuela.action_window">
-      <field name="name">autoescuela window</field>
+    <!-- Vista formulario de Alumno -->
+    <record model="ir.ui.view" id="alumno_form_view">
+      <field name="name">alumno.form</field>
+      <field name="model">autoescuela.alumno</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+
+            <!-- Título del formulario -->
+            <div class="oe_title">
+                <h1>
+                    <field name="name" placeholder="Nombre del Alumno"/>
+                </h1>
+            </div>
+
+            <!-- Datos principales -->
+            <group>
+                <group>
+                    <field name="dni"/>        <!-- DNI -->
+                    <field name="matricula"/>  <!-- Matrícula -->
+                    <field name="domicilio"/>  <!-- Dirección -->
+                </group>
+                <group>
+                    <field name="profesor_id"/>    <!-- Profesor -->
+                    <field name="autoescuela_id"/> <!-- Autoescuela -->
+                </group>
+            </group>
+
+            <!-- Pestañas -->
+            <notebook>
+                <page string="Exámenes">
+                    <field name="examen_ids"/> <!-- Exámenes del alumno -->
+                </page>
+            </notebook>
+
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Acción de ventana para Alumnos -->
+    <record model="ir.actions.act_window" id="autoescuela.autoescuela_action_window">
+      <field name="name">Autoescuelas</field>
       <field name="res_model">autoescuela.autoescuela</field>
       <field name="view_mode">tree,form</field>
     </record>
--->
 
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="autoescuela.action_server">
-      <field name="name">autoescuela server</field>
-      <field name="model_id" ref="model_autoescuela_autoescuela"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
+    <record model="ir.actions.act_window" id="autoescuela.alumno_action_window">
+      <field name="name">Alumnos</field>
+      <field name="res_model">autoescuela.alumno</field>
+      <field name="view_mode">tree,form</field>
     </record>
--->
 
-    <!-- Top menu item -->
-<!--
-    <menuitem name="autoescuela" id="autoescuela.menu_root"/>
--->
-    <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="autoescuela.menu_1" parent="autoescuela.menu_root"/>
-    <menuitem name="Menu 2" id="autoescuela.menu_2" parent="autoescuela.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="autoescuela.menu_1_list" parent="autoescuela.menu_1"
-              action="autoescuela.action_window"/>
-    <menuitem name="Server to list" id="autoescuela" parent="autoescuela.menu_2"
-              action="autoescuela.action_server"/>
--->
+    <record model="ir.actions.act_window" id="autoescuela.profesor_action_window">
+      <field name="name">Profesores</field>
+      <field name="res_model">autoescuela.profesor</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="autoescuela.examen_action_window">
+      <field name="name">Examenes</field>
+      <field name="res_model">autoescuela.examen</field>
+      <field name="view_mode">tree,form,calendar</field>
+      <!-- Contexto para activar el filtro por defecto -->
+      <field name="context">{'search_default_filter_carnet_b': 1}</field>
+    </record>
+
+    <!-- Menu Padre-->
+    <menuitem name="Autoescuela" id="autoescuela.menu_root" />
+
+    <!-- definir las categorias del menu con sus acciones -->
+    <menuitem name="Autoescuela" id="autoescuela.menu_autoescuela" parent="autoescuela.menu_root"
+      action="autoescuela.autoescuela_action_window" />
+    <menuitem name="Alumnos" id="autoescuela.menu_alumno" parent="autoescuela.menu_root"
+      action="autoescuela.alumno_action_window" />
+    <menuitem name="Profesores" id="autoescuela.menu_profesor" parent="autoescuela.menu_root"
+      action="autoescuela.profesor_action_window" />
+    <menuitem name="Examenes" id="autoescuela.menu_examen" parent="autoescuela.menu_root"
+      action="autoescuela.examen_action_window" />
+
   </data>
 </odoo>

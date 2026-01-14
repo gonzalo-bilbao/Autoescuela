@@ -1,20 +1,19 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "autoescuela",
+    'name': "Autoescuela",
 
-    'summary': "Short (1 phrase/line) summary of the module's purpose",
+    'summary': "Trabajo gestion empresas de autoescuelas",
 
     'description': """
-Long description of module's purpose
+Trabajo de gestion de empresas de autoescuelas en el cual
+trabajamos con github para crear un modulo en odoo mediante visual studio code
     """,
 
-    'author': "My Company",
-    'website': "https://www.yourcompany.com",
+    'author': "Alberto Luque, Vicente Mena, Gonzalo Bilbao",
+    'website': "https://github.com/gonzalo-bilbao/Autoescuela",
 
     # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
-    # for the full list
-    'category': 'Uncategorized',
+    'category': 'Administration', # He cambiado Uncategorized por algo más estándar
     'version': '1.0',
 
     # any module necessary for this one to work correctly
@@ -22,7 +21,9 @@ Long description of module's purpose
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/autoescuela_security.xml',
+        'security/ir.model.access.csv',
+        # 'data/sequence_data.xml',        
         'views/views.xml',
         'views/templates.xml',
     ],
@@ -30,5 +31,7 @@ Long description of module's purpose
     'demo': [
         'demo/demo.xml',
     ],
+    # indicamos que es una aplicacion para que salga en el menú principal
+    'application': True,
+    'installable': True,
 }
-
