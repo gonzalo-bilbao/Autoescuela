@@ -2,7 +2,7 @@
 {
     'name': "Autoescuela",
 
-    'summary': "Trabajo gestionn empresas de autoescuelas",
+    'summary': "Trabajo gestion empresas de autoescuelas",
 
     'description': """
 Trabajo de gestion de empresas de autoescuelas en el cual
@@ -13,9 +13,7 @@ trabajamos con github para crear un modulo en odoo mediante visual studio code
     'website': "https://github.com/gonzalo-bilbao/Autoescuela",
 
     # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
-    # for the full list
-    'category': 'Uncategorized',
+    'category': 'Administration', # He cambiado Uncategorized por algo más estándar
     'version': '1.0',
 
     # any module necessary for this one to work correctly
@@ -23,7 +21,9 @@ trabajamos con github para crear un modulo en odoo mediante visual studio code
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/autoescuela_security.xml',
+        'security/ir.model.access.csv',
+        # 'data/sequence_data.xml',        
         'views/views.xml',
         'views/templates.xml',
     ],
@@ -31,7 +31,7 @@ trabajamos con github para crear un modulo en odoo mediante visual studio code
     'demo': [
         'demo/demo.xml',
     ],
-    #inidcamos que es una aplicacion
+    # indicamos que es una aplicacion para que salga en el menú principal
     'application': True,
+    'installable': True,
 }
-
