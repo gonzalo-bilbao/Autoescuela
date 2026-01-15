@@ -1,0 +1,35 @@
+<odoo>
+  <data>
+    <record model="ir.actions.act_window" id="autoescuela_autoescuela_action_window">
+      <field name="name">Autoescuelas</field>
+      <field name="res_model">autoescuela.autoescuela</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="autoescuela_alumno_action_window">
+      <field name="name">Alumnos</field>
+      <field name="res_model">autoescuela.alumno</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="autoescuela_profesor_action_window">
+      <field name="name">Profesores</field>
+      <field name="res_model">autoescuela.profesor</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="autoescuela_examen_action_window">
+      <field name="name">Exámenes</field>
+      <field name="res_model">autoescuela.examen</field>
+      <field name="view_mode">tree,form</field>
+      <field name="context">{'search_default_agrupar_por_carnet': 1}</field>
+    </record>
+
+
+    <menuitem name="Autoescuela" id="autoescuela_menu_root" web_icon="autoescuela,static/description/icon.png"/>
+    <menuitem name="Autoescuelas" id="autoescuela_menu_autoescuela" parent="autoescuela_menu_root" action="autoescuela_autoescuela_action_window" sequence="10"/>
+    <menuitem name="Profesores" id="autoescuela_menu_profesor" parent="autoescuela_menu_root" action="autoescuela_profesor_action_window" sequence="20"/>
+    <menuitem name="Alumnos" id="autoescuela_menu_alumno" parent="autoescuela_menu_root" action="autoescuela_alumno_action_window" sequence="30"/>
+    <menuitem name="Exámenes por Alumno" id="autoescuela_menu_examen" parent="autoescuela_menu_root" action="autoescuela_examen_action_window" sequence="40"/>
+  </data>
+</odoo>

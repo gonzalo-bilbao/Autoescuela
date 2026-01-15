@@ -23,9 +23,14 @@ trabajamos con github para crear un modulo en odoo mediante visual studio code
     'data': [
         'security/autoescuela_security.xml',
         'security/ir.model.access.csv',
+        
         # 'data/sequence_data.xml',        
-        'views/views.xml',
-        'views/templates.xml',
+        #'views/views.xml',
+        #'views/templates.xml',
+
+        'views/autoescuela_menus.xml', 
+        'views/autoescuela_alumno_view.xml',
+        'views/autoescuela_profesor_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

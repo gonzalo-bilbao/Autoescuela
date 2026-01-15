@@ -1,0 +1,41 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="autoescuela_profesor_tree">
+      <field name="name">autoescuela.profesor.tree</field>
+      <field name="model">autoescuela.profesor</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="dni"/>
+          <field name="matricula"/>
+          <field name="incorporacion"/>
+          <field name="antiguedad"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="autoescuela_profesor_form">
+      <field name="name">autoescuela.profesor.form</field>
+      <field name="model">autoescuela.profesor</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+                <field name="name"/>
+                <field name="dni"/>
+                <field name="coche"/>
+                <field name="matricula"/>
+                <field name="incorporacion"/>
+                <field name="antiguedad"/>
+            </group>
+            <notebook>
+                <page string="Alumnos">
+                    <field name="alumno_ids"/>
+                </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+  </data>
+</odoo>

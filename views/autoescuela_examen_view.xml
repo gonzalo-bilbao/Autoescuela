@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="autoescuela_examen_search">
+      <field name="name">autoescuela.examen.search</field>
+      <field name="model">autoescuela.examen</field>
+      <field name="arch" type="xml">
+        <search>
+           <field name="name"/>
+           <field name="alumno_id"/>
+           <field name="carnet"/>
+           <filter string="Por Carnet" name="agrupar_por_carnet" context="{'group_by':'carnet'}"/>
+        </search>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="autoescuela_examen_tree">
+      <field name="name">autoescuela.examen.tree</field>
+      <field name="model">autoescuela.examen</field>
+      <field name="arch" type="xml">
+        <tree decoration-success="aprobado==True" decoration-danger="aprobado==False">
+          <field name="name"/>
+          <field name="fecha"/>
+          <field name="precio"/>
+          <field name="clases"/>
+          <field name="carnet"/>
+          <field name="aprobado"/>
+          <field name="alumno_id"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="autoescuela_examen_form">
+      <field name="name">autoescuela.examen.form</field>
+      <field name="model">autoescuela.examen</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <div class="oe_title">
+                <h1><field name="name" readonly="1"/></h1>
+            </div>
+            <group>
+                <group>
+                    <field name="fecha"/>
+                    <field name="precio"/>
+                    <field name="clases"/>
+                </group>
+                <group>
+                    <field name="carnet"/>
+                    <field name="aprobado"/>
+                    <field name="alumno_id"/>
+                </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+  </data>
+</odoo>
