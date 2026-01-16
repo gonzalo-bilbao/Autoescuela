@@ -1,0 +1,76 @@
+<odoo>
+    <data>
+        <record id="action_report_alumno" model="ir.actions.report">
+            <field name="name">Ficha del alumno</field>
+            <field name="model">autoescuela.alumno</field>
+            
+            <field name="report_type">qweb-html</field>
+            
+            <field name="report_name">autoescuela.report_alumno_card</field>
+            <field name="report_file">autoescuela.report_alumno_card</field>
+            <field name="binding_model_id" ref="model_autoescuela_alumno"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="report_alumno_card">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="obj">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            
+                            <div class="">
+                                <h2>Ficha del Alumno</h2>
+                                <h3><span t-field="obj.name"/></h3>
+                            </div>
+                            <br/>
+
+                            <div class="row mt-4">
+                                <div class="col-6">
+                                    <strong>DNI:</strong> <span t-field="obj.dni"/><br/>
+                                    <strong>Matrícula:</strong> <span t-field="obj.matricula"/><br/>
+                                    <strong>Domicilio:</strong> <span t-field="obj.domicilio"/>
+                                </div>
+                                <div class="col-6">
+                                    <strong>Autoescuela:</strong> <span t-field="obj.autoescuela_id"/><br/>
+                                    <strong>Profesor:</strong> <span t-field="obj.profesor_id"/>
+                                </div>
+                            </div>
+                            
+                            <hr/>
+
+                            <h4 class="mt-4">Historial de Exámenes</h4>
+                            
+                            <t t-if="obj.examen_ids">
+                                <table class="table table-sm table-striped mt-2">
+                                    <thead>
+                                        <tr>
+                                            <th>Referencia</th>
+                                            <th>Fecha</th>
+                                            <th>Carnet</th>
+                                            <th>Resultado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="obj.examen_ids" t-as="examen">
+                                            <td><span t-field="examen.name"/></td>
+                                            <td><span t-field="examen.fecha"/></td>
+                                            <td><span t-field="examen.carnet"/></td>
+                                            <td>
+                                                <span t-if="examen.aprobado" class="text-success">APROBADO</span>
+                                                <span t-else="" class="text-danger">SUSPENSO</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </t>
+                            <t t-else="">
+                                <p class="text-muted">No se han registrado exámenes para este alumno.</p>
+                            </t>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

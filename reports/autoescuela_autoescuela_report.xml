@@ -1,0 +1,148 @@
+<odoo>
+    <data>
+        <record id="action_report_autoescuela" model="ir.actions.report">
+            <field name="name">Informe de Autoescuela</field>
+            <field name="model">autoescuela.autoescuela</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">autoescuela.report_autoescuela_card</field>
+            <field name="report_file">autoescuela.report_autoescuela_card</field>
+            <field name="binding_model_id" ref="model_autoescuela_autoescuela"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="report_autoescuela_card">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="obj">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            
+                            <div class="text-center d-print-none mb-4">
+                                <a t-attf-href="/report/pdf/autoescuela.report_autoescuela_card/#{obj.id}" 
+                                   class="btn btn-primary btn-lg">
+                                    <i class="fa fa-print"></i> Descargar / Imprimir PDF
+                                </a>
+                                <hr/>
+                            </div>
+
+                            <div class="mt-4">
+                                <h1><span t-field="obj.name"/></h1>
+                                
+                                <div class="mt-3">
+                                    <p class="mb-1"><strong>Domicilio:</strong> <span t-field="obj.domicilio"/></p>
+                                    <p class="mb-1"><strong>Localidad:</strong> <span t-field="obj.localidad"/></p>
+                                    <p class="mb-1"><strong>Provincia:</strong> <span t-field="obj.provincia"/></p>
+                                    <p class="mb-1"><strong>Contacto:</strong> <span t-field="obj.contacto"/></p>
+                                </div>
+                            </div>
+
+                            <br/>
+                            <hr style="border-top: 3px solid #ccc;"/>
+
+                            <h5><strong>Exámenes</strong></h5>
+                            <t t-if="obj.examen_ids">
+                                <table class="table table-sm mt-2">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Precio</th>
+                                            <th>Moneda</th>
+                                            <th>Clases</th>
+                                            <th>Carnet</th>
+                                            <th>Aprobado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="obj.examen_ids" t-as="exam">
+                                            <td><span t-field="exam.fecha"/></td>
+                                            
+                                            <td>
+                                                <span t-field="exam.precio" 
+                                                      t-options='{"widget": "monetary", "display_currency": exam.moneda_id or exam.env.company.currency_id}'/>
+                                            </td>
+                                            
+                                            <td><span t-field="exam.moneda_id.name"/></td>
+                                            <td><span t-field="exam.clases"/></td>
+                                            <td><span t-field="exam.carnet"/></td>
+                                            <td>
+                                                <span t-if="exam.aprobado">Sí</span>
+                                                <span t-else="">No</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </t>
+                            <t t-else="">
+                                <p class="text-muted mb-4">No hay exámenes registrados.</p>
+                            </t>
+
+                            <hr style="border-top: 3px solid #ccc;"/>
+
+                            <h5><strong>Profesores asignados</strong></h5>
+                            <t t-if="obj.profesor_ids">
+                                <table class="table table-sm mt-2">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>DNI</th>
+                                            <th>Coche</th>
+                                            <th>Matrícula</th>
+                                            <th>Autoescuela</th>
+                                            <th>Incorporación</th>
+                                            <th>Antigüedad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="obj.profesor_ids" t-as="prof">
+                                            <td><span t-field="prof.name"/></td>
+                                            <td><span t-field="prof.dni"/></td>
+                                            <td><span t-field="prof.coche"/></td>
+                                            <td><span t-field="prof.matricula"/></td>
+                                            <td><span t-field="prof.autoescuela_id"/></td>
+                                            <td><span t-field="prof.incorporacion"/></td>
+                                            <td><span t-field="prof.antiguedad"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </t>
+                            <t t-else="">
+                                <p class="text-muted mb-4">No hay profesores asignados.</p>
+                            </t>
+
+                            <hr style="border-top: 3px solid #ccc;"/>
+
+                            <h5><strong>Alumnos matriculados</strong></h5>
+                            <t t-if="obj.alumno_ids">
+                                <table class="table table-sm mt-2">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>DNI</th>
+                                            <th>Autoescuela</th>
+                                            <th>Profesor</th>
+                                            <th>Domicilio</th>
+                                            <th>Matrícula</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="obj.alumno_ids" t-as="alum">
+                                            <td><span t-field="alum.name"/></td>
+                                            <td><span t-field="alum.dni"/></td>
+                                            <td><span t-field="alum.autoescuela_id"/></td>
+                                            <td><span t-field="alum.profesor_id"/></td>
+                                            <td><span t-field="alum.domicilio"/></td>
+                                            <td><span t-field="alum.matricula"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </t>
+                            <t t-else="">
+                                <p class="text-muted">No hay alumnos matriculados.</p>
+                            </t>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

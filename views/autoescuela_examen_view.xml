@@ -18,14 +18,16 @@
       <field name="name">autoescuela.examen.tree</field>
       <field name="model">autoescuela.examen</field>
       <field name="arch" type="xml">
-        <tree decoration-success="aprobado==True" decoration-danger="aprobado==False">
-          <field name="name"/>
+        <tree>
+          <field name="name" string="Código del Examen"/>
           <field name="fecha"/>
           <field name="precio"/>
+          <field name="moneda_id"/>
           <field name="clases"/>
           <field name="carnet"/>
           <field name="aprobado"/>
-          <field name="alumno_id"/>
+          <field name="alumno_id" string="Alumno a Examinar"/>
+          <field name="autoescuela_ids" widget="many2many_tags" string="Autoescuelas Asociadas"/>
         </tree>
       </field>
     </record>
@@ -49,6 +51,7 @@
                     <field name="carnet"/>
                     <field name="aprobado"/>
                     <field name="alumno_id"/>
+                    <field name="autoescuela_ids" widget="many2many_tags"/>
                 </group>
             </group>
           </sheet>

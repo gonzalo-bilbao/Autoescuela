@@ -1,0 +1,75 @@
+<odoo>
+    <data>
+        <record id="action_report_profesor" model="ir.actions.report">
+            <field name="name">Informe de Profesor</field>
+            <field name="model">autoescuela.profesor</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">autoescuela.report_profesor_card</field>
+            <field name="report_file">autoescuela.report_profesor_card</field>
+            <field name="binding_model_id" ref="model_autoescuela_profesor"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="report_profesor_card">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="obj">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            
+                            <div class="text-center d-print-none mb-4">
+                                <a t-attf-href="/report/pdf/autoescuela.report_profesor_card/#{obj.id}" 
+                                   class="btn btn-primary btn-lg">
+                                    <i class="fa fa-print"></i> Descargar / Imprimir PDF
+                                </a>
+                                <hr/>
+                            </div>
+
+                            <div class="mt-4">
+                                <h1><span t-field="obj.name"/></h1>
+                                
+                                <div class="mt-3">
+                                    <p class="mb-1"><strong>DNI:</strong> <span t-field="obj.dni"/></p>
+                                    <p class="mb-1"><strong>Autoescuela:</strong> <span t-field="obj.autoescuela_id"/></p>
+                                    <p class="mb-1"><strong>Coche:</strong> <span t-field="obj.coche"/></p>
+                                    <p class="mb-1"><strong>Matrícula:</strong> <span t-field="obj.matricula"/></p>
+                                    <p class="mb-1"><strong>Fecha Incorporación:</strong> <span t-field="obj.incorporacion"/></p>
+                                    <p class="mb-1"><strong>Antigüedad:</strong> <span t-field="obj.antiguedad"/> años</p>
+                                </div>
+                            </div>
+
+                            <br/>
+                            <hr style="border-top: 3px solid #ccc;"/>
+
+                            <h5><strong>Alumnos asignados</strong></h5>
+                            
+                            <t t-if="obj.alumno_ids">
+                                <table class="table table-sm mt-2">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>DNI</th>
+                                            <th>Matrícula</th>
+                                            <th>Domicilio</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="obj.alumno_ids" t-as="alum">
+                                            <td><span t-field="alum.name"/></td>
+                                            <td><span t-field="alum.dni"/></td>
+                                            <td><span t-field="alum.matricula"/></td>
+                                            <td><span t-field="alum.domicilio"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </t>
+                            <t t-else="">
+                                <p class="text-muted">Este profesor no tiene alumnos asignados actualmente.</p>
+                            </t>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

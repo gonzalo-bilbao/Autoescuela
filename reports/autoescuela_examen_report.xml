@@ -1,0 +1,87 @@
+<odoo>
+    <data>
+        <record id="action_report_examen" model="ir.actions.report">
+            <field name="name">Informe de los exámenes por alumno</field>
+            <field name="model">autoescuela.examen</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">autoescuela.report_examen_card</field>
+            <field name="report_file">autoescuela.report_examen_card</field>
+            <field name="binding_model_id" ref="model_autoescuela_examen"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="report_examen_card">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="obj">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            
+                            <div class="text-center d-print-none mb-4">
+                                <a t-attf-href="/report/pdf/autoescuela.report_examen_card/#{obj.id}" 
+                                   class="btn btn-primary btn-lg">
+                                    <i class="fa fa-print"></i> Descargar / Imprimir PDF
+                                </a>
+                                <hr/>
+                            </div>
+
+                            <div class="mt-4">
+                                <h1><span t-field="obj.name"/></h1>
+                                
+                                <div class="mt-3">
+                                    <p class="mb-1"><strong>Fecha:</strong> <span t-field="obj.fecha"/></p>
+                                    
+                                    <p class="mb-1"><strong>Precio:</strong> 
+                                        <span t-field="obj.precio" 
+                                              t-options='{"widget": "monetary", "display_currency": obj.moneda_id or obj.env.company.currency_id}'/>
+                                    </p>
+                                    
+                                    <p class="mb-1"><strong>Moneda:</strong> <span t-field="obj.moneda_id.name"/></p>
+                                    <p class="mb-1"><strong>Clases:</strong> <span t-field="obj.clases"/></p>
+                                    
+                                    <p class="mb-1"><strong>Aprobado:</strong> 
+                                        <span t-if="obj.aprobado">Sí</span>
+                                        <span t-else="">No</span>
+                                    </p>
+                                    
+                                    <p class="mb-1"><strong>Alumno:</strong> <span t-field="obj.alumno_id"/></p>
+                                </div>
+                            </div>
+
+                            <br/>
+                            <hr style="border-top: 3px solid #ccc;"/>
+
+                            <h5><strong>Autoescuelas</strong></h5>
+                            
+                            <t t-if="obj.autoescuela_ids">
+                                <table class="table table-sm mt-2">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Domicilio</th>
+                                            <th>Localidad</th>
+                                            <th>Provincia</th>
+                                            <th>Contacto</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="obj.autoescuela_ids" t-as="school">
+                                            <td><span t-field="school.name"/></td>
+                                            <td><span t-field="school.domicilio"/></td>
+                                            <td><span t-field="school.localidad"/></td>
+                                            <td><span t-field="school.provincia"/></td>
+                                            <td><span t-field="school.contacto"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </t>
+                            <t t-else="">
+                                <p class="text-muted">No hay autoescuelas asociadas a este examen.</p>
+                            </t>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

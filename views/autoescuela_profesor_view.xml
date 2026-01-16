@@ -30,7 +30,12 @@
             </group>
             <notebook>
                 <page string="Alumnos">
-                    <field name="alumno_ids"/>
+                    <field name="alumno_ids">
+                        <tree>
+                            <field name="name"/>
+                            <field name="dni"/>
+                        </tree>
+                    </field>
                 </page>
             </notebook>
           </sheet>
